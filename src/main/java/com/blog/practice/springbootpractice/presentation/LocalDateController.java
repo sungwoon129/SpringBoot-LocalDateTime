@@ -35,4 +35,10 @@ public class LocalDateController {
         log.info("post 요청 데이터 = {}",localDateJsonDto);
         return "post mission complete.";
     }
+
+    @GetMapping("/response")
+    public LocalDateJsonDto response() {
+        return new LocalDateJsonDto("swy",LocalDateTime.of(2022,10,27,23,11,12));
+    }
+
 }

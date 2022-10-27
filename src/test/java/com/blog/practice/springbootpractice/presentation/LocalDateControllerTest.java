@@ -61,13 +61,27 @@ class LocalDateControllerTest {
         //when
         ResultActions resultActions = mvc.perform(post(url)
                                                     .contentType(MediaType.APPLICATION_JSON)
-                                                    .content("{\"name\":\"swy\", \"dateTime\":\"2022-10-27 16:51:00\"}"));
+                                                    .content("{\"name\":\"swy\", \"dateTime\":\"2022-10-27 16:24:00\"}"));
 
         //then
         resultActions
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("post mission complete.")));
 
+    }
+
+    @DisplayName("LocalDateJsonDto의 LocalDateTime은 변환된다")
+    @Test
+    public void test4() throws Exception {
+        //given
+        String url = "/response";
+
+        //when
+        ResultActions resultActions = mvc.perform(get(url));
+
+        //then
+        resultActions.andExpect(status().isOk())
+                        .andExpect(content().json("{\"name\": \"swy\", \"dateTime\": \"2022-10-27 23:11:12\"}"));
     }
 
 }
