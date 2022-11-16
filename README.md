@@ -21,7 +21,7 @@ Spring을 사용해서 API 서버 혹은 웹 프로젝트를 개발하면서 Con
 
 혹시 Spring Boot 1.X 버전을 사용하시는 분들은 [ JSR 310 ](https://mvnrepository.com/artifact/com.fasterxml.jackson.datatype/jackson-datatype-jsr310/2.9.7) 이 필요하다고 합니다. 
 없으면 `json parse error`가 발생한다고 합니다.
-저는 Spring Boot 2.X 버전부터는 JSR 310이 기본 의존성으로 포함되어 있어 따로 의존성을 추가하지 않으셔도 됩니다.
+Spring Boot 2.X 버전부터는 JSR 310이 기본 의존성으로 포함되어 있어 따로 의존성을 추가하지 않으셔도 됩니다.
 
 ## 1. 요청/응답 방법별 LocalDateTime 변환 방법 ##
 뷰 혹은 클라이언트에서 서버로 GET이나 POST같은 HTTP 메소드를 사용해서 데이터를 보냅니다.    
