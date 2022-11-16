@@ -4,7 +4,6 @@
 작성한 코드는 모두 [ Github ](https://github.com/sungwoon129/SpringBootPractice) 에 있습니다.
 
 ## 0. 시작하며 ##
-<hr />
 
 Spring을 사용해서 API 서버 혹은 웹 프로젝트를 개발하면서 Controller에서 요청을 받거나 응답을 주는 DTO에서 날짜 혹은 시간과 관련된 정보를 String 으로    
 선언한 필드로 받아서 LocalDateTime으로 변환하는 것을 많이 보았고, 얼마 전까지 저 또한 그렇게 처리했습니다. 그렇게 변환하면서도 비효율적이라고 많이 생각하고    
