@@ -87,9 +87,8 @@ GET 요청을 보내는 간단한 테스트입니다. 이제 실행해 보겠습
 ![@ModelAttribute 테스트 이미지](/images/1.png)
 
 테스트가 실패했습니다.   
-dateTime 필드의 변환에 실패했다고 합니다. 쿼리스트링의 dateTime 키의 값은 String 타입인데, LocalDateDto의 dateTime 필드의 타입은 LocalDateTime   
-이라서 변환할 수 없다고 합니다.   
-이 문제를 해결하기 위해서 `@DateTimeFormat`이라는 스프링에서 지원하는 어노테이션이 있습니다.   
+dateTime 필드의 변환에 실패했다고 합니다. 쿼리스트링의 dateTime 키의 값은 String 타입인데, LocalDateDto의 dateTime 필드의 타입은 LocalDateTime이라서 변환할 수 없다고 합니다.   
+이 문제를 해결하기 위해서 `@DateTimeFormat`이라는 **스프링에서 지원하는 어노테이션**이 있습니다.   
 이 어노테이션은 `LocalDate`와`LocalDateTime`같은 날짜관련타입의 직렬화 및 변환을 지원합니다.   
 LocalDateDto의 dateTime필드에 어노테이션을 붙여주겠습니다. 
 ```java
@@ -103,8 +102,9 @@ public class LocalDateDto {
     private final LocalDateTime dateTime;
 }
 ```
-> 예제코드에서는 년-월-일 다음에 공백을 두는 형태의 패턴을 사용했지만, 일반적으로는 띄어쓰기보다 `2022-10-26T11:00:00`과 같은 패턴을 선호합니다.
-> 띄어쓰기로 인해서 잘못된 값이 넘어올 수 있기 때문이라고 합니다. 대신 T를 그대로 패턴에서 사용할 수 없어서 다음과 같이 ''로 감싸서 표현합니다.   
+> 예제코드에서는 년-월-일 다음에 공백을 두는 형태의 패턴을 사용했지만, 일반적으로는 띄어쓰기보다    
+>`2022-10-26T11:00:00`과 같은 패턴을 선호합니다.
+> 띄어쓰기로 인해서 잘못된 값이 넘어올 수 있기 때문입니다. 대신 T를 그대로 패턴에서 사용할 수 없어서 다음과 같이 ''로 감싸서 표현합니다.   
 > pattern = "yyyy-MM-dd'T'HH:mm:ss"
 
 다시 테스트를 수행해 보겠습니다.
