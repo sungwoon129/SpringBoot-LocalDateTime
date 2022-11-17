@@ -61,7 +61,7 @@ class LocalDateControllerTest {
         //when
         ResultActions resultActions = mvc.perform(post(url)
                                                     .contentType(MediaType.APPLICATION_JSON)
-                                                    .content("{\"name\":\"swy\", \"dateTime\":\"2022-10-27 16:24:00\"}"));
+                                                    .content("{\"name\":\"swy\", \"dateTime\":\"2022-10-27T16:24:00\"}"));
 
         //then
         resultActions

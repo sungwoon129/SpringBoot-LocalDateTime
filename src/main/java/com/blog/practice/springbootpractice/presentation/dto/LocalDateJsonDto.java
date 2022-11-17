@@ -8,7 +8,6 @@ import java.time.LocalDateTime;
 
 @ToString
 @Getter
-@Setter
 @NoArgsConstructor
 public class LocalDateJsonDto {
 
@@ -21,7 +20,7 @@ public class LocalDateJsonDto {
      * @JsonFormat 어노테이션이 없다면 LocalDateTime의 기본 포맷인 yyyy-MM-ddTHH:mm:ss 만 받을 수 있습니다. @DateTimeFormat의 Json 데이터의 Dto 매핑에 영향을 주지 않습니다
      */
     //@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
+    //@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
     private LocalDateTime dateTime;
 
     public LocalDateJsonDto(String name, LocalDateTime dateTime) {

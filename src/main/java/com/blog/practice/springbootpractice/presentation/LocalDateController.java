@@ -18,8 +18,6 @@ public class LocalDateController {
         return "mission complete";
     }
 
-
-    @ResponseBody
     @GetMapping("/requestParameter")
     public String get(
             @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
