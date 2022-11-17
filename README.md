@@ -110,6 +110,7 @@ public class LocalDateDto {
 테스트를 다시 해보겠습니다.
 
 ![@ModelAttribute 테스트 이미지](/images/1-1.GET_JsonFormat_테스트실패.png)
+   
 
 여전히 실패합니다. 콘솔창에 있는 오류 내용도 동일합니다. 어떻게 해야 해결할 수 있을까요?   
 이 문제를 해결하기 위해서 `@DateTimeFormat`이라는 **스프링에서 지원하는 어노테이션**이 있습니다.   
