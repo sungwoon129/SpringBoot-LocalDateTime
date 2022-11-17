@@ -5,8 +5,7 @@
 
 ## 0. 시작하며 ##
 
-Spring을 사용해서 API 서버 혹은 웹 프로젝트를 개발하면서 Controller에서 요청을 받거나 응답을 주는 DTO에서 날짜 혹은 시간과 관련된 정보를 String 으로    
-선언한 필드로 받아서 LocalDateTime으로 변환하는 것을 많이 보았고, 얼마 전까지 저 또한 그렇게 처리했습니다. 그렇게 변환하면서도 비효율적이라고 많이 생각하고    
+Spring을 사용해서 API 서버 혹은 웹 프로젝트를 개발하면서 Controller에서 요청을 받거나 응답을 주는 DTO에서 날짜 혹은 시간과 관련된 정보를 String 으로 선언한 필드로 받아서 LocalDateTime으로 변환하는 것을 많이 보았고, 얼마 전까지 저 또한 그렇게 처리했습니다. 그렇게 변환하면서도 비효율적이라고 많이 생각하고    
 고민하며 찾아보다가 좋은 방법을 찾아서 공유하려고 합니다.
 
 저는 다음과 같은 개발환경에서 진행하였습니다.
@@ -85,7 +84,7 @@ class LocalDateControllerTest {
 ```
 GET 요청을 보내는 간단한 테스트입니다. 이제 실행해 보겠습니다.
 
-![@ModelAttribute 테스트 이미지](/images/1.png)
+![@ModelAttribute 테스트 이미지](https://user-images.githubusercontent.com/43958570/202443679-24752891-cd41-4f5d-a28f-0277f2327af1.png)
 
 테스트가 실패했습니다.   
 dateTime 필드의 변환에 실패했다고 합니다. 쿼리스트링의 dateTime 키의 값은 String 타입인데, LocalDateDto의 dateTime 필드의 타입은 LocalDateTime이라서 변환할 수 없다고 합니다.
@@ -111,7 +110,7 @@ public class LocalDateDto {
 
 테스트를 다시 해보겠습니다.
 
-![@ModelAttribute 테스트 이미지](/images/1-1.GET_JsonFormat_테스트실패.png)
+![@ModelAttribute 테스트 이미지](https://user-images.githubusercontent.com/43958570/202443781-6ce1e6d7-bcec-476a-bed3-132e10486ca2.png)
    
 
 여전히 실패합니다. 콘솔창에 있는 오류 내용도 동일합니다. 어떻게 해야 해결할 수 있을까요?   
@@ -134,7 +133,7 @@ public class LocalDateDto {
 
 다시 테스트를 수행해 보겠습니다.
 
-![@ModelAttribute 테스트 이미지](/images/2.png)
+![@ModelAttribute 테스트 이미지](https://user-images.githubusercontent.com/43958570/202443845-5ce12e81-26bf-419b-9520-5d6c093c0b84.png)
 
 테스트가 성공한 것을 확인할 수 있습니다.   
 `@ModelAttribute`를 사용한 Dto 형태로 날짜 데이터를 받을 때는 `@DateTimeFormat`을 사용하면 `LocalDateTime`으로 받을 수 있다는 것을 확인했습니다.
@@ -170,7 +169,7 @@ public void test2() throws Exception {
 }
 ```
 
-![@RequestParameter 테스트 성공 이미지](/images/4.png)
+![@RequestParameter 테스트 성공 이미지](https://user-images.githubusercontent.com/43958570/202443955-f503c596-2e1e-4e67-b961-5f2fcad1458c.png)
 
 `@ModelAttribute` 때와 동일한 원인으로 실패합니다.   
 그래서 이번에도 `@DateTime` 어노테이션을 적용시켜보겠습니다.
@@ -186,7 +185,7 @@ public String get(
     return "mission complete";
 }
 ```
-![@RequestParameter 테스트 성공 이미지](/images/3.png)
+![@RequestParameter 테스트 성공 이미지](https://user-images.githubusercontent.com/43958570/202443909-44622671-3f5b-4f07-b8c4-7e05c6e263d6.png)
 
 테스트를 통과했습니다. `@RequestParameter`도 `@DateTimeFormt`을 통해서 날짜포맷의 String을 LocalDateTime으로 직렬화 할 수 있다는 것을 확인했습니다.   
 지금까지 GET 요청에서 날짜포맷의 String을 Java의 LocalDateTime에 매핑시키는지 알아보았습니다.   
@@ -241,7 +240,7 @@ public void test3() throws Exception {
 ```
 GET 요청과 마찬가지로 먼저 아무런 어노테이션 없이 테스트를 해보겠습니다.
 
-![POST 요청 어노테이션 없이 LocalDateTime 변환실패](/images/5.POST_LocalDateTime_변환실패1.png)
+![POST 요청 어노테이션 없이 LocalDateTime 변환실패](https://user-images.githubusercontent.com/43958570/202444007-92cbe0a2-080f-4a7f-a576-e4910161d412.png)
 
 실패하는군요. 하지만 GET 요청때와는 메시지가 조금 다릅니다. 
 String타입의 데이터를 LocalDateTime으로 직렬화하지 못했다고 합니다. 어떻게하면 직렬화 할 수 있을까요?   
@@ -259,7 +258,7 @@ public class LocalDateJsonDto {
 }
 ```
 테스트를 해보면!!
-![POST 요청 DateTimeFormat LocalDateTime 변환실패](/images/6.POST_LocalDateTime_변환실패.png)
+![POST 요청 DateTimeFormat LocalDateTime 변환실패](https://user-images.githubusercontent.com/43958570/202444071-e538f0d0-dbbc-4525-a5de-9ef5c87b125b.png)
 
 >제가 참조한 [기억보단 기록을](https://jojoldu.tistory.com/361) 블로그에서는 `@DateTimeFormat`을 사용해서 직렬화하는 테스트가 성공했습니다.    
 >하지만 저는 실패해서 원인을 찾아보니 패턴의 차이가 있었습니다. 참조한 블로그에서는 사용한 날짜패턴이 yyyy-MM-dd'T'HH:mm:ss 였고, 제가   
@@ -285,7 +284,7 @@ public class LocalDateJsonDto {
 }
 ```
 테스트를 해보면!!!
-![POST요청 @JsonFormat으로 변환성공](/images/7.POST_JsonFormat_테스트성공.png)
+![POST요청 @JsonFormat으로 변환성공](https://user-images.githubusercontent.com/43958570/202444124-064b2b95-6974-4719-9f9b-8b7fd9726224.png)
 드디어 성공했습니다!   
 `@RequestBody`에서는 `@JsonFormat`을 적용해야 원하는 포맷으로 날짜를 다룰 수 있다는 것을 알 수 있습니다.   
 여기까지 해서 중간정리를 해보면 다음과 같은 사실을 알 수 있습니다.
@@ -348,7 +347,7 @@ public void test4() throws Exception {
 ```
 이번에도 어노테이션 없이 먼저 테스트 해보겠습니다.
 
-![@ResponseBody 어노테이션 없이 테스트 실패](/images/8.RESPONSE_NO_ANNOTATION.png)
+![@ResponseBody 어노테이션 없이 테스트 실패](https://user-images.githubusercontent.com/43958570/202444167-e39e3687-b814-4427-9e07-45bcffe7ebd0.png)
 
 테스트가 실패했습니다. 하지만 역직렬화 과정에서 Exception이 발생하거나 오류가 발생하진 않았습니다. status도 200이고 body도 잘 들어가 있습니다.   
 아무런 어노테이션이 없는 경우에는 LocalDateTime의 기본포맷인 yyyy-MM-ddTHH:mm:ss 형식으로 반환하는 것을 볼 수 있습니다.   
@@ -371,7 +370,7 @@ public class LocalDateJsonDto {
 ```
 테스트를 해보겠습니다.
 
-![@ResponseBody @DateTimeFormat 실패](/images/9.RESPONSE_DateTimeFormat_테스트실패.png)
+![@ResponseBody @DateTimeFormat 실패](https://user-images.githubusercontent.com/43958570/202444203-08d1bead-aa17-480a-96b2-2ad644bac0d1.png)
 
 여전히 실패합니다. 실패원인도 어노테이션이 없을 때와 동일합니다.   
 그렇다면, `@JsonFormat`을 적용시켜 보겠습니다.
@@ -393,7 +392,7 @@ public class LocalDateJsonDto {
 ```
 `@JsonFormat`의 결과는?
 
-![@ResponseBody @JsonFormat 성공](/images/10.RESPONSE_JsonFormat_성공.png)
+![@ResponseBody @JsonFormat 성공](https://user-images.githubusercontent.com/43958570/202444243-d6095a6e-65d9-4d5f-9b65-7223f82cc47d.png)
 
 테스트를 통과합니다.   
 정리하면, **`@ResponseBody`에서 원하는 포맷으로 리턴하려면 `@JsonFormat`을 사용**해야합니다.
@@ -406,7 +405,7 @@ public class LocalDateJsonDto {
 스프링의 기본 JSON message converter는 Jackson입니다. Jackson은 스프링이 주고 받는 JSON 메시지들을 Java DTO 객체에 매핑해주고 변환하는 등의 다양한 처리를   
 합니다. 그래서 Jackson에서 지원하는 어노테이션인 `@JsonFormat`은 LocalDate,LocalDateTime,YearMonth등을 JSON으로 직렬화할때 포맷을 관리합니다.
 
-![라이브러리](/images/11.external_lib.png)
+![라이브러리](https://user-images.githubusercontent.com/43958570/202444282-6b90586f-0b9d-49d3-bb8a-c2e01a7410b9.png)
 
 `spring-boot-starter-web`의존성 설정이 되어있다면, 별도로 설치하지 않아도 안에 포함되어 있습니다.   
 Jackson 라이브러리가 포함되어 있다면 스프링은 JSON 직렬화를 Jackson을 통해서 진행합니다. Jackson이 없는 경우에는 기본으로 설정된 SpringBoot의 메시지컨버터에서   
